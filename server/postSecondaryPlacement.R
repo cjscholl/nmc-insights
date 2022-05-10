@@ -43,6 +43,7 @@ output$post_secondary_placement_plot <- renderPlotly({
     geom_text(aes(x = `High School Graduating Class`, y = `Percentage`, label = sprintf("%d%%", `Percentage`), group = `Placement Type`, colour=`Placement Type`),
               position = position_stack(vjust = .5), colour="white") +
     theme_minimal() +
+    theme(axis.text.x=element_text(angle=30,hjust=1)) +
     xlim(hs_min, hs_max) + 
     ylim(0, 100) +
     scale_x_continuous(breaks = seq(hs_min, hs_max, by=1))

@@ -1,0 +1,13 @@
+name: NMC-Insights
+title: NMC-Insights
+username:
+account: catelynscholl
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6255633
+bundleId: 5882122
+url: https://catelynscholl.shinyapps.io/NMC-Insights/
+when: 1651956800.94459
+lastSyncTime: 1651956800.94461
+asMultiple: FALSE
+asStatic: FALSE

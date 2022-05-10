@@ -8,8 +8,10 @@ tabPanel("Graduate Support",
         div(
           style = "card",
           class = "card",
-          uiOutput("ms_graduation_year_slider")
-        )
+          uiOutput("ms_graduation_year_slider"),
+          uiOutput("graduate_support_coalition_checkbox")
+        ),
+        
       ),
       column(
         10,
@@ -31,7 +33,7 @@ tabPanel("Graduate Support",
               style = "card",
               class = "card",
               h4("Historical Average"),
-              h5("HS Graduate Rate"),
+              h5("HS Graduation Rate"),
               textOutput("average_high_school_graduation_rate")
              ),
                

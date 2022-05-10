@@ -10,7 +10,8 @@ tabPanel("School Data",
                class = "card",
                uiOutput("ms_graduation_year_slider_school_data"),
                br(),
-               uiOutput("school_year_slider")
+               uiOutput("school_year_slider"),
+               uiOutput("school_data_coalition_checkbox")
              ),
            ),
            column(

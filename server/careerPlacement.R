@@ -64,9 +64,11 @@ output$career_placement_plot <- renderPlotly({
     geom_text(aes(x = `Post Secondary Follow Up Year`, y = `Percentage`, label = sprintf("%d%%", `Percentage`), group = `Type`, colour=`Type`),
               position = position_stack(vjust = .5), colour="white")+
     theme_minimal() +
+    theme(axis.text.x=element_text(angle=30,hjust=1)) +
     xlim(fuy_min, fuy_max) + 
     ylim(0, 100) +
     scale_x_continuous(breaks = seq(fuy_min, fuy_max, by=1))
+  
   return (ggplotly(plot, tooltip = c("x", "y", "group")))
   
 })

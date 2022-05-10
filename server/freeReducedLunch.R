@@ -36,10 +36,22 @@ output$free_reduced_lunch_trend_plot <- renderPlotly({
   req(nrow(filtered_df) > 0)
   Average = average_free_reduced_lunch_trend()
   
-  ggplot(data=filtered_df, aes(x=`School Year`, y=`Free/Reduced Lunch Percentage`, group=1)) +
+  plot <- ggplot(data=filtered_df, aes(x=`School Year`, y=`Free/Reduced Lunch Percentage`, group=1)) +
     ylim(0, 100) +
-    geom_line(colour="navy")+
-    geom_point()+
-    geom_hline(aes(yintercept = Average), color="red") +
-    theme_minimal()
+    geom_line(colour="#AFD2E9")+
+    geom_point(colour="#AFD2E9", shape=21, fill="white") +
+    geom_hline(aes(yintercept = Average), color="#002855") +
+    theme_minimal() +
+    theme(axis.text.x=element_text(angle=30,hjust=1))
+  
+  if(isTruthy(input$file2) && isTruthy(input$school_data_coalition_checkbox)) {
+    df_coalition <- reactive_coalition_free_reduced_lunch_historical_df()
+    req(df_coalition)
+    filtered_df_coalition = slice(df_coalition, min_index:max_index)
+    
+    plot <- plot + geom_line(data=filtered_df_coalition, aes(x=`School Year`, y=`Free/Reduced Lunch Percentage`), colour="#E15551") + 
+      geom_point(data=filtered_df_coalition, aes(x=`School Year`, y=`Free/Reduced Lunch Percentage`), colour="#E15551", shape=21, fill="white")
+  }
+  
+  return (plot)
 })
