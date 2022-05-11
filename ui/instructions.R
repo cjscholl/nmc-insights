@@ -1,6 +1,6 @@
 tabPanel("Instructions", 
          h2("Instructions"), 
-         p("Please upload your school spreadsheet(s) - Historical and Current - using the upload buttons below. Once you have uploaded your spreadsheet(s), you can use the menu to navigate to various charts and tables."),
+         p("Please upload your school spreadsheet(s) - Historical School (required) and Coalition (optional) - using the upload buttons below. Once you have uploaded your spreadsheet(s), you can use the menu to navigate to various charts and tables."),
          hr(),
          fluidRow(
            column(4,

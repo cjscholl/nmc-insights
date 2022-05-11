@@ -127,7 +127,7 @@ shinyServer(function(input, output) {
  
 
   
-  # Middle school graduation year slider
+  # Middle school graduation year slider - graduate support tab
   output$ms_graduation_year_slider <- renderUI({
     col_name <- 'Middle School Graduating Class'
     col <- sort(
@@ -152,6 +152,7 @@ shinyServer(function(input, output) {
     )
   })
   
+  # Middle school graduation year slider - school data tab
   output$ms_graduation_year_slider_school_data <- renderUI({
     col_name <- 'Middle School Graduating Class'
     col <- sort(
@@ -172,7 +173,7 @@ shinyServer(function(input, output) {
     )
   })
   
-  # school year slider
+  # school year slider - school data tab
   output$school_year_slider <- renderUI({
     col_name <- 'School Year'
     col <- sort(
@@ -207,6 +208,7 @@ shinyServer(function(input, output) {
     checkboxInput("school_data_coalition_checkbox", "Show Coalition Comparison", value = TRUE, width = NULL)
   })
   
+  # download file functionality
   output$school_historical_template <- downloadHandler(
     filename <- function() {
       paste("school-historical-template", ".xlsx", sep="")
@@ -215,17 +217,17 @@ shinyServer(function(input, output) {
     content <- function(file) {
       file.copy("server/NMCSchoolHistoricalTemplate.xlsx", file)
     },
-    )
+  )
   
   
   
-  ### VISUALIZATIONS FOR GRADUATE SUPPORT
+  ### VISUALIZATIONS FOR GRADUATE SUPPORT pulled in by relative file
   source(file.path("server", "careerPlacement.R"),  local = TRUE)$value
   source(file.path("server", "hsGraduation.R"),  local = TRUE)$value
   source(file.path("server", "postSecondaryPlacement.R"),  local = TRUE)$value
   source(file.path("server", "postSecondaryCompletion.R"),  local = TRUE)$value
 
-  ### VISUALIZATIONS FOR SCHOOL DATA
+  ### VISUALIZATIONS FOR SCHOOL DATA pulled in by relative file
   source(file.path("server", "entryExitGrad.R"),  local = TRUE)$value
   source(file.path("server", "enrollment.R"),  local = TRUE)$value
   source(file.path("server", "attendance.R"),  local = TRUE)$value

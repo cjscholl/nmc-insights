@@ -47,5 +47,25 @@ output$post_secondary_placement_plot <- renderPlotly({
     xlim(hs_min, hs_max) + 
     ylim(0, 100) +
     scale_x_continuous(breaks = seq(hs_min, hs_max, by=1))
+  
+  if(isTruthy(input$file2) && isTruthy(input$graduate_support_coalition_checkbox)) {
+    df_coalition <- bind_rows(list(School=reactive_post_secondary_placement_df(), Coalition=reactive_coalition_post_secondary_placement_df()), .id="id")
+    filtered_df = filter(df_coalition, between(`Middle School Graduating Class`, min, max))
+    req(filtered_df$`High School Graduating Class`)
+    filtered_df.long <- pivot_longer(filtered_df, cols=4:5, names_to = "Placement Type", values_to = "Percentage")
+    req(filtered_df.long$`High School Graduating Class`)
+    plot <- ggplot(filtered_df.long, aes(x = `High School Graduating Class`, y = `Percentage`, fill = `Placement Type`)) + 
+      geom_bar(stat = 'identity', position = position_stack()) +
+      facet_grid(id~., switch = "y") +
+      scale_fill_manual(values=c("#003a70", "#cb2c30")) +
+      geom_text(aes(x = `High School Graduating Class`, y = `Percentage`, label = sprintf("%d%%", `Percentage`), group = `Placement Type`, colour=`Placement Type`),
+                position = position_stack(vjust = .5), colour="white") +
+      theme_minimal() +
+      theme(axis.text.x=element_text(angle=30,hjust=1)) +
+      xlim(hs_min, hs_max) + 
+      ylim(0, 100) +
+      scale_x_continuous(breaks = seq(hs_min, hs_max, by=1))
+     
+  }
   return (ggplotly(plot, tooltip = c("x", "y", "group")))
 })
